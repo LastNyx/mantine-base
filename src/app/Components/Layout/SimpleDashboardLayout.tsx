@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { AppShell, Burger, Group, rem } from "@mantine/core";
+import { AppShell, Burger, Divider, Group, rem } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { NavbarMinimalDesktop } from "@/app/Components/Layout/NavbarMinimal/Desktop/NavbarMinimal.desktop.tsx";
 import classes from "./SimpleDashboardLayout.module.css";
@@ -63,6 +63,7 @@ const SimpleDashboardLayout = () => {
         <div style={{ padding: "var(--mantine-spacing-sm)" }}>
           <PageBreadcrumbs />
         </div>
+        <Divider py={rem(5)} />
         <Outlet />
       </AppShell.Main>
     </AppShell>
