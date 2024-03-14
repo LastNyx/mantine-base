@@ -1,15 +1,46 @@
 .navbar {
     width: rem(80px);
     height: 100%;
-    padding: var(--mantine-spacing-md);
+    padding: var(--mantine-spacing-xs);
     display: flex;
     flex-direction: column;
     border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    transition: all 0.3s ease;
+
+    &[data-expanded]{
+        width: rem(270px);
+    }
 }
+
+
+.expandButton{
+    padding: rem(5px);
+    align-items: start;
+    transition: all 0.3s ease;
+
+    &[data-expanded]{
+        align-items: end;
+        transition: all 0.3s ease
+    }
+}
+
+/*.expandButtonOpen{*/
+/*    */
+/*    */
+/*    transition: all 0.2s ease*/
+/*}*/
 
 .navbarMain {
     flex: 1;
-    margin-top: rem(20px);
+    height: 100%;
+    overflow: auto;
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
 }
 
 .link {

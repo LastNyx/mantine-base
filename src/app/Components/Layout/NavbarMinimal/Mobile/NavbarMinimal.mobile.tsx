@@ -6,6 +6,7 @@ import {
   IconFingerprint,
   IconGauge,
   IconHome2,
+  IconHomeBolt,
   IconLogout,
   IconSettings,
   IconSwitchHorizontal,
@@ -13,16 +14,20 @@ import {
 } from "@tabler/icons-react";
 import classes from "./NavbarMinimal.mobile.module.css";
 import { ColorSchemeToggle } from "@/lib/components/ColorSchemeToggle/ColorSchemeToggle.tsx";
-import { NavLinkButton } from "@/lib/components/NavLinkButton/NavLinkButton.tsx";
+import { NavLinkButton } from "@/lib/components/Buttons/NavLinkButton/NavLinkButton.tsx";
 
 const mockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
+  {
+    icon: IconHome2,
+    label: "Home",
+    links: [{ icon: IconHomeBolt, label: "Home Sub", link: "/home-sub" }],
+  },
+  { icon: IconGauge, label: "Dashboard", link: "/dashboard" },
+  { icon: IconDeviceDesktopAnalytics, label: "Analytics", link: "/analytics" },
+  { icon: IconCalendarStats, label: "Releases", link: "/releases" },
+  { icon: IconUser, label: "Account", link: "/account" },
+  { icon: IconFingerprint, label: "Security", link: "/security" },
+  { icon: IconSettings, label: "Settings", link: "/settings" },
 ];
 
 export function NavbarMinimalMobile() {

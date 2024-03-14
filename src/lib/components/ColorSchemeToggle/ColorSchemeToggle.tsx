@@ -6,15 +6,22 @@ import {
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import cx from "clsx";
 import classes from "./ColorSchemeToggle.module.css";
-import { NavLinkButton } from "@/lib/components/NavLinkButton/NavLinkButton.tsx";
+import { NavLinkButton } from "@/lib/components/Buttons/NavLinkButton/NavLinkButton.tsx";
 
 interface IColorSchemeProps {
   isNavLink?: boolean;
   isMobile?: boolean;
+  expanded?: boolean;
+  disableTooltip?: boolean;
 }
 
 export function ColorSchemeToggle(props: IColorSchemeProps) {
-  const { isNavLink = false, isMobile = false } = props;
+  const {
+    isNavLink = false,
+    isMobile = false,
+    expanded = false,
+    disableTooltip = false,
+  } = props;
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
@@ -30,6 +37,8 @@ export function ColorSchemeToggle(props: IColorSchemeProps) {
             setColorScheme(computedColorScheme === "light" ? "dark" : "light")
           }
           isMobile={isMobile}
+          expanded={expanded}
+          disableTooltip={disableTooltip}
         />
       ) : null}
 

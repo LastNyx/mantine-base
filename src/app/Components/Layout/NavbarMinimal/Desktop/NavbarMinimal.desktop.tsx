@@ -1,45 +1,51 @@
-import { useState } from "react";
-import { Center, Stack } from "@mantine/core";
+import { Divider, rem, Stack } from "@mantine/core";
 import {
-  IconCalendarStats,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconGauge,
-  IconHome2,
+  IconArrowBarLeft,
+  IconArrowBarRight,
   IconLogout,
-  IconSettings,
   IconSwitchHorizontal,
-  IconUser,
 } from "@tabler/icons-react";
 import classes from "./NavbarMinimal.desktop.module.css";
 import { ColorSchemeToggle } from "@/lib/components/ColorSchemeToggle/ColorSchemeToggle.tsx";
-import { NavLinkButton } from "@/lib/components/NavLinkButton/NavLinkButton.tsx";
+import { NavLinkButton } from "@/lib/components/Buttons/NavLinkButton/NavLinkButton.tsx";
+import { navigationData } from "@/app/Navigation/Navigation.ts";
 
-const mockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
-];
+interface NavbarMinimalDesktopProps {
+  expandNavLink?: boolean;
+  toggleExpandNavLink?: () => void;
+}
 
-export function NavbarMinimalDesktop() {
-  const [active, setActive] = useState(2);
+export function NavbarMinimalDesktop(props: NavbarMinimalDesktopProps) {
+  const { expandNavLink, toggleExpandNavLink } = props;
 
-  const links = mockdata.map((link, index) => (
+  const links = navigationData.map((link) => (
     <NavLinkButton
       {...link}
       key={link.label}
-      active={index === active}
-      onClick={() => setActive(index)}
+      expanded={expandNavLink}
+      disableTooltip={expandNavLink}
     />
   ));
 
   return (
-    <nav className={classes.navbar}>
-      <Center>{/*<MantineLogo type="mark" size={30} />*/}</Center>
+    <nav
+      className={classes.navbar}
+      data-expanded={expandNavLink ? "data-expanded" : undefined}
+    >
+      <Stack
+        justify="center"
+        className={classes.expandButton}
+        data-expanded={expandNavLink ? "data-expanded" : undefined}
+      >
+        <NavLinkButton
+          icon={expandNavLink ? IconArrowBarLeft : IconArrowBarRight}
+          label={expandNavLink ? "Close" : "Expand"}
+          onClick={toggleExpandNavLink}
+          disableTooltip={expandNavLink}
+        />
+      </Stack>
+
+      <Divider />
 
       <div className={classes.navbarMain}>
         <Stack justify="center" gap={0}>
@@ -47,10 +53,26 @@ export function NavbarMinimalDesktop() {
         </Stack>
       </div>
 
+      <Divider p={rem("5px")} />
+
       <Stack justify="center" gap={0}>
-        <ColorSchemeToggle isNavLink={true} />
-        <NavLinkButton icon={IconSwitchHorizontal} label="Change account" />
-        <NavLinkButton icon={IconLogout} label="Logout" />
+        <ColorSchemeToggle
+          isNavLink={true}
+          expanded={expandNavLink}
+          disableTooltip={expandNavLink}
+        />
+        <NavLinkButton
+          icon={IconSwitchHorizontal}
+          label="Change account"
+          expanded={expandNavLink}
+          disableTooltip={expandNavLink}
+        />
+        <NavLinkButton
+          icon={IconLogout}
+          label="Logout"
+          expanded={expandNavLink}
+          disableTooltip={expandNavLink}
+        />
       </Stack>
     </nav>
   );
